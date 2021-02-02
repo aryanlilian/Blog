@@ -1,8 +1,12 @@
-const express = require('express')
+const express = require('express');
+const morgan = require('morgan');
 
 app = express();
 app.listen(8000);
 app.set('view engine', 'ejs')
+
+app.use(morgan('dev'))
+app.use(express.static('static'))
 
 app.get('/', (req, res) => {
     res.render('index', {title : 'Index', page_title : 'Home Page'});
