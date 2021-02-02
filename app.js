@@ -2,19 +2,21 @@ const express = require('express')
 
 app = express();
 app.listen(8000);
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    res.sendFile('./views/index.html', {root : __dirname});
+    res.render('index', {title : 'Index', page_title : 'Home Page'});
 });
 
 app.get('/blog', (req, res) => {
-    res.sendFile('./views/blog.html', {root : __dirname});
-});
-
-app.get('/blog-me', (req, res) => {
-    res.redirect('/blog');
+    const blogs = [
+        {title : 'First post', content : 'The content here'},
+        {title : 'Second post', content : 'The content here'},
+        {title : 'Third post', content : 'The content here'},
+    ];
+    res.render('blog', {title : 'Blog', page_title : 'Blog Page', blogs});
 });
 
 app.use((req, res) => {
-    res.sendFile('./views/404.html', {root : __dirname});
+    res.render('404', {title : '404', page_title : 'Page don\'t exist'});
 });
