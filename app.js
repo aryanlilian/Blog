@@ -31,6 +31,26 @@ app.get('/blog', (req, res) => {
     });
 });
 
+app.get('/blog/post/:id', (req, res) => {
+    Blog.findById(req.params.id)
+    .then(result => {
+        res.render('post', { blog: result, title: 'Blog details', page_title: 'Hello there' });
+    })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
+app.delete('/blog/post/:id', (req, res) => {
+    Blog.findByIdAndDelete(req.params.id)
+    .then(result => {
+        res.json({ redirect: '/blog' });
+    })
+    .catch(err => {
+        console.log(err);
+    })
+})
+
 app.post('/blog', (req, res) => {
     console.log(req.body);
     const blog = new Blog(req.body);

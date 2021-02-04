@@ -5,8 +5,10 @@
         <%- include('./partials/nav.ejs') %>
         <% if (blogs.length > 0) { %>
             <% blogs.forEach(blog => { %>
-                <h3><%= blog.title %></h3>
-                <p><%= blog.content %></p>
+                <a href="/blog/post/<%= blog._id %>">
+                    <h3><%= blog.title %></h3>
+                    <p><%= blog.content %></p>
+                </a>
             <% }) %>
         <% } %>
         <%- include('./partials/footer.ejs') %>
